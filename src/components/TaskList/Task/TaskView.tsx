@@ -1,11 +1,11 @@
-import React, { ChangeEvent } from "react";
+import React from "react";
 import { IStateProps } from "./model";
-
-
 import "./Task.scss";
 
-export const TaskView: React.FC<IStateProps> = ({ item },props:IStateProps) => {
-  const { id, isCompleted, title, category } = item;
+export const TaskView: React.FC<IStateProps> = ( props:IStateProps) => {
+  const {handleChange,handleDesc,handleEdit,handleRemove} = props;
+  const { id, isCompleted, title, category } = props.item;
+  
   return (
     <li className="list-group-item">
       <div className="input-group mb-3">
@@ -15,7 +15,7 @@ export const TaskView: React.FC<IStateProps> = ({ item },props:IStateProps) => {
               type="checkbox"
               aria-label="Checkbox for following text input"
               checked={isCompleted}
-              onChange={(event: ChangeEvent<HTMLInputElement>)=>props.hadleChange(id)}
+              onChange={()=>handleChange(id)}
             />
           </div>
         </div>
@@ -32,11 +32,11 @@ export const TaskView: React.FC<IStateProps> = ({ item },props:IStateProps) => {
           )}
         </span>
         <div className="btn-group btn-group-toggle" data-toggle="buttons">
-          <label onClick={(event:React.MouseEvent)=>props.hadleDesc(item)} className="btn btn-outline-info">
+          <label onClick={()=>handleDesc(props.item)} className="btn btn-outline-info">
             <input type="radio" name="options" id="option1" />
             More
           </label>
-          <label onClick={(event:React.MouseEvent)=>props.hadleRemove(id)} className="btn btn-outline-danger">
+          <label onClick={()=>handleRemove(id)} className="btn btn-outline-danger">
             <input type="radio" name="options" id="option1" />
             <i className="fa fa-trash" aria-hidden="true"></i>
           </label>
@@ -44,7 +44,7 @@ export const TaskView: React.FC<IStateProps> = ({ item },props:IStateProps) => {
             className={`btn btn-outline-warning ${
               isCompleted ? " disabled" : ""
             }`}
-            onClick={(event:React.MouseEvent)=>props.hadleEdit(title,category,id)}
+            onClick={()=>handleEdit(title,category,id)}
           >
             <input type="radio" name="options" id="option3" />
             <i className="fa fa-pencil" aria-hidden="true"></i>

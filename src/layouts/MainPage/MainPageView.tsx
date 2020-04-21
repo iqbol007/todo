@@ -5,6 +5,7 @@ import { IStateProps } from "./model";
 import TaskDescription from "../../components/TaskDescription";
 import TaskAddForm from "../../components/TaskAddForm";
 export const MainPageView: React.FC<IStateProps>  = (props: IStateProps) => {
+  
   return (
     <div className="row p-0 m-0 mb-4">
       <div className="col-md-10 main">

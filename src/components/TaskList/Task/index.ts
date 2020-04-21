@@ -5,21 +5,28 @@ import { completeTask, removeTask, getDescription, editTask } from "../../../sto
 import { Itask } from "../../../store/reducers/taskReducer";
 const Task = (props:any) => {
   const dispatch  = useDispatch();
-const  hadleChange = (id:number) => {
+const  hadleChangeOne = (id:number) => {
+  
+  
     dispatch(completeTask(id));
   };
-const hadleRemove = (id:number) => {
+const hadleRemoveItem = (id:number) => {
     dispatch(removeTask(id));
   };
- const  hadleDesc= (item:Itask) => {
+ const  hadleDescipion= (item:Itask) => {
     dispatch(getDescription(item));
   };
- const  hadleEdit = (title:string,category:string,id:number) => {
+ const  hadleEditItem = (title:string,category:string,id:number) => {
     dispatch(editTask(title, category, id));
   };
   const stateProps: IStateProps = {
-    ...props,hadleRemove,hadleEdit,hadleDesc,hadleChange
+    ...props,
+    handleChange:(id:number) => hadleChangeOne(id),
+    handleDesc:(item)=>hadleDescipion(item),
+    handleEdit:(title,category,id) => hadleEditItem(title,category,id),
+    handleRemove:(id:number)=>hadleRemoveItem(id)
   };
+  
   return TaskView(stateProps);
 };
 export default Task;
